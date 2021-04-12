@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage{xfp}
+\usepackage{fontspec}
+\usepackage{tikz}
+
+\setmainfont{Norasi} % need to compile with LuaLaTeX or XeLaTeX.
+
+\newcommand{\picscale}{1}
+
+\newcommand{\nameposition}{5,2}
+\newcommand{\namescale}{4}
+\newcommand{\namesep}{\kern+0.15em}
+
+\newcommand{\titlepos}{5.59,3.24}
+\newcommand{\titlescale}{0.85}
+
+\newcommand{\nameseposition}{0.93,2}
+
+\newcommand{\bigcirclecolor}{black}
+\newcommand{\bigcircleposition}{0.94,2}
+\newcommand{\bigcirclesize}{60}
+
+\newcommand{\medcirclecolor}{black}
+\newcommand{\medcircleposition}{7.555,1}
+\newcommand{\medcirclesize}{25}
+
+\newcommand{\smacirclecolor}{black}
+\newcommand{\smacircleposition}{2,0.5}
+\newcommand{\smacirclesize}{16}
+
+\newcommand{\edgewidth}{2.5}
+
+\newcommand{\cells}{1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,0,0,0,1,1,1,1}
+\newcommand{\cellcolordead}{black}
+\newcommand{\cellcolorlive}{white}
+\newcommand{\cellcolorvar}{\cellcolorlive}
+\newcommand{\cellheight}{2.75}
+\newcommand{\cellinit}{2.25}
+\newcommand{\cellsep}{0.3}
+\newcommand{\cellsize}{4}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=\picscale]
+\node[scale=\titlescale]at(\titlepos){GRUPO INTERDISCIPLINARIO DE DIVULGACI\'ON CIENT\'IFICA};
+\foreach\cell[count=\ind]in\cells{
+	\ifnum\cell=1\renewcommand{\cellcolorvar}{\cellcolordead}\fi
+	\node[color=\cellcolorvar,fill,minimum size=\cellsize,rectangle]
+		at(\fpeval{\cellinit+\cellsep*(\ind-1)},\cellheight){};
+} 
+\node[scale=\namescale]at(\nameposition){S\namesep E\namesep C\namesep I\namesep E\namesep N\namesep C\namesep I\namesep A\namesep S};
+\draw[line width=\edgewidth](\bigcircleposition)to(\smacircleposition);
+\node[circle,draw,fill,color=\bigcirclecolor,minimum size=\bigcirclesize]at(\bigcircleposition){};
+\node[scale=\namescale,white]at(\nameseposition){S\namesep E};
+\node[circle,draw,fill,color=\medcirclecolor,minimum size=\medcirclesize]at(\medcircleposition){};
+\node[circle,draw,fill,color=\smacirclecolor,minimum size=\smacirclesize]at(\smacircleposition){};
+\end{tikzpicture}
+
+\end{document}
